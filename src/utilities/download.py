@@ -13,14 +13,14 @@ def temp(yrIn):
         ind =0
 
         for line in file:
-
-        if ind == 3:
-            dateStr = line.decode("utf-8")
-            dates = pd.date_range( pd.to_datetime(dateStr.split('|')[1]).date(),pd.to_datetime(dateStr.split('|')[-1]).date(),freq='D')
-
-        if ind == 13:
-            Edds[j] = np.array([float(i) for i in line.decode("utf-8").split('|')[1:] ])
-        ind = ind +1
+            if ind == 3:
+                dateStr = line.decode("utf-8")
+                dates = pd.date_range( pd.to_datetime(dateStr.split('|')[1]).date(),pd.to_datetime(dateStr.split('|')[-1]).date(),freq='D')
+            
+            if ind == 13:
+                Edds[j] = np.array([float(i) for i in line.decode("utf-8").split('|')[1:] ])
+            
+            ind = ind +1
     
     dfOut = pd.DataFrame(index = dates, columns = ['Temperature'], data =65 - Edds['Heating'] + Edds['Cooling'])
     return dfOut

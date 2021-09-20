@@ -3,7 +3,7 @@ import sys
 
 class pathSetup:
     def __init__(self, root=""):
-        self.scripts = root
+        self.scripts = os.path.dirname(os.path.abspath(root))
         self.inputs  = os.path.join(self.scripts, "inputs")
         self.outputs = os.path.join(self.scripts, "outputs")
         
