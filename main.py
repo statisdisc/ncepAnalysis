@@ -3,6 +3,7 @@ import numpy as np
 
 # User-made modules
 from src.objects.pathSetup import pathSetup
+from src.plots.plotHdd import plotHdd
 from src.plots.plotRollingMean import plotRollingMean
 from src.utilities import download
 from src.utilities.timeElapsed import timeElapsed
@@ -32,6 +33,12 @@ def main():
     print(data.tail(10))
     print(data.info())
     # print(data.describe())
+    
+    yearSum = data[["HDD", "CDD"]].groupby(data.index.year).sum()
+    plotHdd(yearSum, folder.outputs)
+    
+    print(yearSum.head())
+    print(yearSum.tail())
 
 if __name__ == "__main__":
     main()

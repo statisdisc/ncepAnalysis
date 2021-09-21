@@ -26,7 +26,11 @@ def getTempData(year):
             
             ind = ind + 1
     
-    dfOut = pd.DataFrame(index=dates, columns=["Temperature"], data=65-Edds["Heating"]+Edds["Cooling"])
+    dfOut = pd.DataFrame(
+        index   = dates, 
+        columns = ["HDD", "CDD", "Temperature"], 
+        data    = np.vstack((Edds["Heating"], Edds["Cooling"], 65-Edds["Heating"]+Edds["Cooling"])).transpose()
+    )
     return dfOut
 
 def downloadOrLoad(years, folder):
