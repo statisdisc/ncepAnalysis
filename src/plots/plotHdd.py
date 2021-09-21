@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 def plotHdd(data, folder):
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(10,10))
     
-    data["HDD"].plot(ax=ax)
+    data["hdd"].plot(ax=ax)
     
     ax.set_xlabel("Date")
     ax.set_ylabel(r"HDD ($\deg$F)")

@@ -28,8 +28,8 @@ def getTempData(year):
     
     dfOut = pd.DataFrame(
         index   = dates, 
-        columns = ["HDD", "CDD", "Temperature"], 
-        data    = np.vstack((Edds["Heating"], Edds["Cooling"], 65-Edds["Heating"]+Edds["Cooling"])).transpose()
+        columns = ["temperature"], 
+        data    = 65-Edds["Heating"]+Edds["Cooling"]
     )
     return dfOut
 

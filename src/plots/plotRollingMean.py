@@ -6,9 +6,9 @@ def plotRollingMean(data, folder):
     
     data = data.loc['1991-01-01':'1992-01-01']
     
-    # data["Temperature"]           .plot(ax=ax, linewidth=0.5, color="#999999")
-    data["Temperature-rolling-10"].plot(ax=ax, linewidth=1.0, color="blue")
-    data["Temperature-rolling-30"].plot(ax=ax, linewidth=1.0, color="orange")
+    # data["temperature"]           .plot(ax=ax, linewidth=0.5, color="#999999")
+    data["temperature-rolling-10"].plot(ax=ax, linewidth=1.0, color="blue")
+    data["temperature-rolling-30"].plot(ax=ax, linewidth=1.0, color="orange")
     
     ax.set_xlabel("Date")
     ax.set_ylabel(r"Temperature ($\deg$F)")
