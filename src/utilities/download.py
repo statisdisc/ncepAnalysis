@@ -5,6 +5,10 @@ import pandas as pd
 
 ######################################### Functions ################################
 def getTempData(year):
+    '''
+    Download temperature data from the National Center for Environmental Prediction 
+    for a particular year
+    '''
     print(f"Getting data for year {year}")
     Edds={}
 
@@ -34,6 +38,10 @@ def getTempData(year):
     return dfOut
 
 def downloadOrLoad(years, folder):
+    '''
+    Load temperature data from the National Center for Environmental Prediction.
+    Download it if it is not stored locally.
+    '''
     years = np.array(years).astype(int)
     file = os.path.join(folder, f"data-{years[0]}-{years[-1]}.pkl")
     
