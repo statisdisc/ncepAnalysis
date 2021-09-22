@@ -4,62 +4,55 @@ import numpy as np
 # User-made modules
 from src.objects.pathSetup import pathSetup
 from src.plots.plotHdd import plotHddCumsum, plotYearlyHdd
+from src.plots.plotRandomWalk import plotRandomWalk
 from src.plots.plotRollingMean import plotRollingMean
+from src.utilities import addData
 from src.utilities import download
 from src.utilities.timeElapsed import timeElapsed
 
-def addRollingMean(data, column, years=1):
-    # Note, you cannot use f"{years}y" or f"{12*years}m" because a month/year can vary in length
-    # E.g. 28 days vs 31 days in a month, 365 days vs 366 days in a year 
-    period = f"{int(365.2425*years)}d"
-    data[f"{column}-rolling-{years}"] = data.rolling(period, min_periods=1)[column].mean()
-    return data
-
-def addHdd(data):
-    data["hdd"] = 65 - data["temperature"]
-    return data
-
-def addWinterSeason(data):
-    data["winter-season"] = np.nan
-    
-    years = data.groupby(data.index.year).sum().index
-    
-    for year in years[:-1]:
-        data.loc[f"15-11-{year}":f"15-03-{year+1}", "winter-season"] = year
-    
-    # Note that Pandas does not allow for converting to integer columns when nan values are present
-    # Therefore the winter-season column is of type float64.
-    return data
 
 @timeElapsed
 def main():
+    '''
+    Download temperature data from the National Center for Environmental Prediction
+    and use it to analyse trends in the temperature and the heating degree days
+    which determine which days are likely to require homes to be heated.
+    '''
     folder = pathSetup(root=__file__)
     
+    print("\nDownloading and/or loading the temperature data")
     years = np.arange(1981,2021,1)
     data = download.downloadOrLoad(years, folder.data)
     
-    data = addRollingMean(data, "temperature", years=10)
-    data = addRollingMean(data, "temperature", years=30)
-    data = addHdd(data)
-    data = addWinterSeason(data)
+    print("\nProcessing temperature data")
+    data = addData.addRollingMean(data, "temperature", years=10)
+    data = addData.addRollingMean(data, "temperature", years=30)
+    data = addData.addHdd(data)
+    data = addData.addWinterSeason(data)
     
-    # plotRollingMean(data, folder.outputs, id="all", showOriginalData=True)
-    # for year in years:
-        # plotRollingMean(data.loc[f"{year}-01-01":f"{year}-12-31"], folder.outputs, id=year)
-    
+    print("\nData processing completed, data summary:")
     print(data.head())
     print(data.tail())
     print(data.info())
-    # print(data.describe())
+    print(data.describe())
     
-    yearSum = data[["hdd"]].groupby(data["winter-season"]).sum()
-    plotYearlyHdd(yearSum, folder.outputs)
+    print("\nPlotting rolling means of temperature data")
+    plotRollingMean(data, folder.outputs_temp, id="all", showOriginalData=True)
+    for year in years:
+        plotRollingMean(data.loc[f"{year}-01-01":f"{year}-12-31"], folder.outputs_temp, id=year)
     
-    print(yearSum.head())
-    print(yearSum.tail())
+    print("\nPlotting total winter heating degree days")
+    plotYearlyHdd(data, folder.outputs_hdd)
     
-    # for season, df in data[["hdd"]].groupby(data["winter-season"]):
-        # plotHddCumsum(df, folder.outputs, id=int(season))
+    print("\nPlotting cumulative winter heating degree days for each year")
+    for season, df in data[["hdd"]].groupby(data["winter-season"]):
+        plotHddCumsum(df, folder.outputs_hdd, id=int(season))
+    
+    print("\nPlotting random walk simulations")
+    plotRandomWalk(folder.outputs_rw)
+    plotRandomWalk(folder.outputs_rw, bias=-0.5)
+    plotRandomWalk(folder.outputs_rw, bias= 0.5)
+    
 
 if __name__ == "__main__":
     main()

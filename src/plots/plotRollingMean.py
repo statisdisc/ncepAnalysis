@@ -2,6 +2,16 @@ import os
 import matplotlib.pyplot as plt
 
 def plotRollingMean(data, folder, id="", showOriginalData=False):
+    '''
+    Plot the rolling mean of temperature data.
+    
+    :param data: Pandas dataframe object with years as the indices and 
+        ["temperature", temperature-rolling-10, temperature-rolling-30] columns.
+    :param folder: The output directory of the plots.
+    :param id: The unique identifier for the data set.
+    :param showOriginalData: If true, show the non-averaged data.
+    :return: None
+    '''
     print(f"Plotting rolling mean, id: {id}")
     
     fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(10,6))
