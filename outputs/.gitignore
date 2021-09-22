@@ -1,0 +1,9 @@
+# Image files
+*.png
+*.tga
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.xcf
+*.psd
