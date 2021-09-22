@@ -2,7 +2,7 @@
 Package for downloading temperature data from the National Center for Environmental Prediction and using it to analyse trends in the temperature and the heating degree days which determine which days are likely to require homes to be heated.
 
 ## Setup
-[Download Python 3.8 or higher.](https://www.python.org/downloads/)
+[Download and install Python 3.8 or higher.](https://www.python.org/downloads/)
 
 Use the Python package manager ```pip``` or ```pip3``` to install *requirements.txt*.
 
@@ -18,7 +18,7 @@ A plot of temperature timeseries (grey) with a rolling mean of 10 years (blue) a
 <img src="/outputs/temperature/rolling-mean-all.png" width="80%">
 
 
-A plot of total yearlyheating degree days (which is indicitive of the amount of central heating required for households) and a regression-based fit line.
+A plot of total yearly heating degree days (which is indicitive of the amount of central heating required for households) and a regression-based fit line.
 
 <img src="/outputs/hdd/hdd-order-1.png" width="80%">
 
