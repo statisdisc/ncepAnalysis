@@ -2,7 +2,7 @@
 Package for downloading temperature data from the National Center for Environmental Prediction and using it to analyse trends in the temperature and the heating degree days which determine which days are likely to require homes to be heated.
 
 ## Setup
-[Download Python 3.8 or higher.](https://www.python.org/downloads/)
+[Download and install Python 3.8 or higher.](https://www.python.org/downloads/)
 
 Use the Python package manager ```pip``` or ```pip3``` to install *requirements.txt*.
 
