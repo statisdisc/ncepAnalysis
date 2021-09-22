@@ -7,7 +7,9 @@ import pandas as pd
 def getTempData(year):
     '''
     Download temperature data from the National Center for Environmental Prediction 
-    for a particular year
+    for a particular year.
+    
+    Function courtesy of Dr Andrew Annunzio.
     '''
     print(f"Getting data for year {year}")
     Edds={}
