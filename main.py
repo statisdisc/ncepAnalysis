@@ -3,7 +3,7 @@ import numpy as np
 
 # User-made modules
 from src.objects.pathSetup import pathSetup
-from src.plots.plotHdd import plotHdd
+from src.plots.plotHdd import plotHddCumsum, plotYearlyHdd
 from src.plots.plotRollingMean import plotRollingMean
 from src.utilities import download
 from src.utilities.timeElapsed import timeElapsed
@@ -43,7 +43,9 @@ def main():
     data = addHdd(data)
     data = addWinterSeason(data)
     
-    plotRollingMean(data, folder.outputs)
+    # plotRollingMean(data, folder.outputs, id="all", showOriginalData=True)
+    # for year in years:
+        # plotRollingMean(data.loc[f"{year}-01-01":f"{year}-12-31"], folder.outputs, id=year)
     
     print(data.head())
     print(data.tail())
@@ -51,10 +53,13 @@ def main():
     # print(data.describe())
     
     yearSum = data[["hdd"]].groupby(data["winter-season"]).sum()
-    plotHdd(yearSum, folder.outputs)
+    plotYearlyHdd(yearSum, folder.outputs)
     
     print(yearSum.head())
     print(yearSum.tail())
+    
+    # for season, df in data[["hdd"]].groupby(data["winter-season"]):
+        # plotHddCumsum(df, folder.outputs, id=int(season))
 
 if __name__ == "__main__":
     main()
