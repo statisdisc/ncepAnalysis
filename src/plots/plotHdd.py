@@ -20,7 +20,7 @@ def plotYearlyHdd(data, folder):
         
         ax.set_xlim(np.min(x), np.max(x))
         ax.set_xlabel("Date")
-        ax.set_ylabel(r"Total Yearly HDD ($^\circ$F)")
+        ax.set_ylabel(r"Total Winter HDD ($^\circ$F)")
         ax.legend(loc="best")
         
         plt.savefig(
@@ -104,7 +104,7 @@ def plotHddCumsum(data, folder, id=""):
     
     data["hdd-cumsum"].plot(ax=ax, color="black")
     
-    ax.set_ylim(min(0, data["hdd-cumsum"].min()), data["hdd-cumsum"].max())
+    ax.set_ylim(0, 3800)
     ax.set_xlabel("Date")
     ax.set_ylabel(r"Cumulative sum of HDD ($^\circ$F)")
     ax.legend(loc="best")
@@ -123,9 +123,9 @@ def plotHddCumsum(data, folder, id=""):
     
     data["hdd-cumsum-std"].plot(ax=ax, color="black")
     
-    ax.set_ylim(min(0, data["hdd-cumsum-std"].min()), data["hdd-cumsum-std"].max())
+    ax.set_ylim(0, 1050)
     ax.set_xlabel("Date")
-    ax.set_ylabel(r"Cumulative sum of HDD ($^\circ$F)")
+    ax.set_ylabel(r"Rolling st. dev. of cumulative HDD ($^\circ$F)")
     ax.legend(loc="best")
     ax.grid()
     

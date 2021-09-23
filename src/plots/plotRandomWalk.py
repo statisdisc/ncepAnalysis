@@ -68,7 +68,7 @@ def plotRandomWalk(folder, simulations=20, iterations=300, bias=0.):
     
     ax.set_xlim(np.min(iteration), np.max(iteration))
     ax.set_xlabel("Walk iteration")
-    ax.set_ylabel(r"Walk distance from origin")
+    ax.set_ylabel(r"Walk distance")
     ax.set_title(f"Random walk st. dev., bias={bias}")
     ax.legend(loc="best")
     

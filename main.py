@@ -38,6 +38,7 @@ def main():
     
     print("\nPlotting rolling means of temperature data")
     plotRollingMean(data, folder.outputs_temp, id="all", showOriginalData=True)
+    plotRollingMean(data.loc["1990-01-01":"2020-12-31"], folder.outputs_temp, id="rolling-only")
     for year in years:
         plotRollingMean(data.loc[f"{year}-01-01":f"{year}-12-31"], folder.outputs_temp, id=year)
     
